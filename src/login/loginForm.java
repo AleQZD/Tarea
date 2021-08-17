@@ -23,6 +23,7 @@ public class loginForm extends javax.swing.JFrame {
      * Creates new form loginForm
      */
     DBConnection con;
+
     public loginForm() {
         initComponents();
         con = new DBConnection();
@@ -85,22 +86,22 @@ public class loginForm extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(loginbtn)
-                .addGap(190, 190, 190))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(130, 130, 130)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(usertf, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                    .addComponent(passtf))
+                .addContainerGap(174, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton1)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(usertf, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                        .addComponent(passtf)))
-                .addContainerGap(173, Short.MAX_VALUE))
+                    .addComponent(loginbtn))
+                .addGap(190, 190, 190))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,9 +143,9 @@ public class loginForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         String username = usertf.getText();
         String password = passtf.getText();
-        if(username.isEmpty()|| password.isEmpty()){
+        if (username.isEmpty() || password.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
-        }else{
+        } else {
         }
         userLogin(username, password);
     }//GEN-LAST:event_loginbtnActionPerformed
@@ -205,20 +206,19 @@ public class loginForm extends javax.swing.JFrame {
     private void userLogin(String username, String password) {
         Connection dbcon = DBConnection.connectDB();
         try {
-            PreparedStatement st = (PreparedStatement)dbcon.prepareStatement("SELECT * FROM usuarios WHERE UNAME =? AND UPASS =?");
-        st.setString(1, username);
-        st.setString(2, password);
-        ResultSet res = st.executeQuery();
-        if(res.next()){
-            dispose();
-            Dashboard d = new Dashboard();
-            d.setTitle("Clientes");
-            d.setVisible(true);
-        }
+            PreparedStatement st = (PreparedStatement) dbcon.prepareStatement("SELECT * FROM usuarios WHERE UNAME =? AND UPASS =?");
+            st.setString(1, username);
+            st.setString(2, password);
+            ResultSet res = st.executeQuery();
+            if (res.next()) {
+                dispose();
+                Dashboard d = new Dashboard();
+                d.setTitle("Clientes");
+                d.setVisible(true);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(loginForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-       
+
     }
 }

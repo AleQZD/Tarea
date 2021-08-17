@@ -14,7 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author aleqz
@@ -61,6 +60,7 @@ public class Dashboard extends javax.swing.JFrame {
         idtf = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
+        backbtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,6 +77,11 @@ public class Dashboard extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel8.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 12)); // NOI18N
@@ -166,6 +171,16 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        backbtn.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
+        backbtn.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 12)); // NOI18N
+        backbtn.setForeground(new java.awt.Color(255, 255, 255));
+        backbtn.setText("Volver");
+        backbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backbtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -217,7 +232,9 @@ public class Dashboard extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addGap(105, 105, 105)
                                     .addComponent(dcontra, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(backbtn)
+                        .addComponent(jButton1)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
@@ -268,7 +285,9 @@ public class Dashboard extends javax.swing.JFrame {
                         .addComponent(idtf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                .addComponent(jButton4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4)
+                    .addComponent(backbtn))
                 .addGap(27, 27, 27))
         );
 
@@ -295,17 +314,17 @@ public class Dashboard extends javax.swing.JFrame {
         String dmail = dcorreo.getText();
         String dpass = dcontra.getText();
         String dconfrimarcontra = dconfirmarcontra.getText();
-        
-        if(dusername.isEmpty()|| dname.isEmpty() || dsurname.isEmpty() || dnum.isEmpty() || dmail.isEmpty() || dpass.isEmpty() || dconfrimarcontra.isEmpty()){
+
+        if (dusername.isEmpty() || dname.isEmpty() || dsurname.isEmpty() || dnum.isEmpty() || dmail.isEmpty() || dpass.isEmpty() || dconfrimarcontra.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
-        }else{
+        } else {
         }
         userRegisterDashboard(dusername, dname, dsurname, dnum, dmail, dpass, dconfrimarcontra);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-         String dusername = dusuario.getText();
+        String dusername = dusuario.getText();
         String dname = dnombre.getText();
         String dsurname = dapellido.getText();
         String dnum = dnumero.getText();
@@ -313,23 +332,21 @@ public class Dashboard extends javax.swing.JFrame {
         String dpass = dcontra.getText();
         String dconfrimarcontra = dconfirmarcontra.getText();
         String id = idtf.getText();
-        
-        
-        if(id.isEmpty()){
+
+        if (id.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
-        }else{
+        } else {
         }
-        userUpdateDashboard( dusername, dname, dsurname, dnum, dmail, dpass, dconfrimarcontra, id);
+        userUpdateDashboard(dusername, dname, dsurname, dnum, dmail, dpass, dconfrimarcontra, id);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         String id = idtf.getText();
-        
-        
-        if(id.isEmpty()){
+
+        if (id.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Colocar el id del elememto a eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
-        }else{
+        } else {
         }
         userRemoveDashboard(id);
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -340,20 +357,31 @@ public class Dashboard extends javax.swing.JFrame {
         lf.setTitle("Ingresar");
         lf.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
-    public void ShowTable(){
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void backbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbtnActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        usuarioOproducto up = new usuarioOproducto();
+        up.setTitle("Gestion de Usuarios o Productos.");
+        up.setVisible(true);
+    }//GEN-LAST:event_backbtnActionPerformed
+    public void ShowTable() {
         Connection dbcon = DBConnection.connectDB();
         PreparedStatement st;
         try {
-            st = (PreparedStatement)dbcon.prepareStatement("SELECT ID, UNAME, NAME, SURNAME, NUM, EMAIL   FROM usuarios");
+            st = (PreparedStatement) dbcon.prepareStatement("SELECT ID, UNAME, NAME, SURNAME, NUM, EMAIL   FROM usuarios");
             ResultSet res = st.executeQuery();
             jTable1.setModel(DbUtils.resultSetToTableModel(res));
         } catch (SQLException ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-            
-     }
+
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -390,6 +418,7 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backbtn;
     private javax.swing.JTextField dapellido;
     private javax.swing.JPasswordField dconfirmarcontra;
     private javax.swing.JPasswordField dcontra;
@@ -418,25 +447,21 @@ public class Dashboard extends javax.swing.JFrame {
     private void userRegisterDashboard(String dusername, String dname, String dsurname, String dnum, String dmail, String dpass, String dconfrimarcontra) {
         Connection dbcon = DBConnection.connectDB();
         PreparedStatement st;
-        if(dpass.equals(dconfrimarcontra)){
-        try {
-            st = (PreparedStatement)dbcon.prepareStatement("INSERT INTO usuarios(UNAME, NAME, SURNAME, NUM, EMAIL, UPASS, CONUPASS) VALUES(?,?,?,?,?,?,?)");
-            st.setString(1, dusername);
-            st.setString(2, dname);
-            st.setString(3, dsurname);
-            st.setString(4, dnum);
-            st.setString(5, dmail);
-            st.setString(6, dpass);
-            st.setString(7, dconfrimarcontra);
-        int res = st.executeUpdate();
-            dispose();
-            Dashboard d = new Dashboard();
-            d.setTitle("Clientes");
-            d.setVisible(true);
-        }catch (SQLException ex) {
-            Logger.getLogger(registerForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        }else{
+        if (dpass.equals(dconfrimarcontra)) {
+            try {
+                st = (PreparedStatement) dbcon.prepareStatement("INSERT INTO usuarios(UNAME, NAME, SURNAME, NUM, EMAIL, UPASS, CONUPASS) VALUES(?,?,?,?,?,?,?)");
+                st.setString(1, dusername);
+                st.setString(2, dname);
+                st.setString(3, dsurname);
+                st.setString(4, dnum);
+                st.setString(5, dmail);
+                st.setString(6, dpass);
+                st.setString(7, dconfrimarcontra);
+                int res = st.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(registerForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
             JOptionPane.showMessageDialog(this, "Asegurese de poner la misma contraseña", "Error", JOptionPane.ERROR_MESSAGE);
         }
         ShowTable();
@@ -445,9 +470,9 @@ public class Dashboard extends javax.swing.JFrame {
     private void userUpdateDashboard(String dusername, String dname, String dsurname, String dnum, String dmail, String dpass, String dconfrimarcontra, String id) {
         Connection dbcon = DBConnection.connectDB();
         PreparedStatement st;
-        
+
         try {
-            st = (PreparedStatement)dbcon.prepareStatement("UPDATE usuarios SET UNAME =?, NAME =?, SURNAME =?, NUM =?, EMAIL =?, UPASS =?, CONUPASS =? WHERE ID=?");
+            st = (PreparedStatement) dbcon.prepareStatement("UPDATE usuarios SET UNAME =?, NAME =?, SURNAME =?, NUM =?, EMAIL =?, UPASS =?, CONUPASS =? WHERE ID=?");
             st.setString(1, dusername);
             st.setString(2, dname);
             st.setString(3, dsurname);
@@ -456,8 +481,8 @@ public class Dashboard extends javax.swing.JFrame {
             st.setString(6, dpass);
             st.setString(7, dconfrimarcontra);
             st.setString(8, id);
-        int res = st.executeUpdate(); 
-        }catch (SQLException ex) {
+            int res = st.executeUpdate();
+        } catch (SQLException ex) {
             Logger.getLogger(registerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         ShowTable();
@@ -467,13 +492,13 @@ public class Dashboard extends javax.swing.JFrame {
         Connection dbcon = DBConnection.connectDB();
         PreparedStatement st;
         try {
-            st = (PreparedStatement)dbcon.prepareStatement("DELETE FROM usuarios WHERE ID=?");
+            st = (PreparedStatement) dbcon.prepareStatement("DELETE FROM usuarios WHERE ID=?");
             st.setString(1, id);
-        int res = st.executeUpdate(); 
-        }catch (SQLException ex) {
+            int res = st.executeUpdate();
+        } catch (SQLException ex) {
             Logger.getLogger(registerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         ShowTable();
     }
-    
+
 }

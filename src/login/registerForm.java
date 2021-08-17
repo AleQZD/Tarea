@@ -199,10 +199,10 @@ public class registerForm extends javax.swing.JFrame {
         String rmail = rcorreo.getText();
         String rpass = rcontra.getText();
         String rconfrimarcontra = rconfirmarcontra.getText();
-        
-        if(rusername.isEmpty()|| rname.isEmpty() || rsurname.isEmpty() || rnum.isEmpty() || rmail.isEmpty() || rpass.isEmpty() || rconfrimarcontra.isEmpty()){
+
+        if (rusername.isEmpty() || rname.isEmpty() || rsurname.isEmpty() || rnum.isEmpty() || rmail.isEmpty() || rpass.isEmpty() || rconfrimarcontra.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
-        }else{
+        } else {
         }
         userRegister(rusername, rname, rsurname, rnum, rmail, rpass, rconfrimarcontra);
     }//GEN-LAST:event_registrarsebtnActionPerformed
@@ -264,27 +264,25 @@ public class registerForm extends javax.swing.JFrame {
     private void userRegister(String rusername, String rname, String rsurname, String rnum, String rmail, String rpass, String rconfrimarcontra) {
         Connection dbcon = DBConnection.connectDB();
         PreparedStatement st;
-        if(rpass.equals(rconfrimarcontra)){
-        try {
-            st = (PreparedStatement)dbcon.prepareStatement("INSERT INTO usuarios(UNAME, NAME, SURNAME, NUM, EMAIL, UPASS, CONUPASS) VALUES(?,?,?,?,?,?,?)");
-            st.setString(1, rusername);
-            st.setString(2, rname);
-            st.setString(3, rsurname);
-            st.setString(4, rnum);
-            st.setString(5, rmail);
-            st.setString(6, rpass);
-            st.setString(7, rconfrimarcontra);
-        ResultSet res = st.executeQuery();
-        if(res.next()){
-            dispose();
-            Dashboard d = new Dashboard();
-            d.setTitle("Clientes");
-            d.setVisible(true);
+        if (rpass.equals(rconfrimarcontra)) {
+            try {
+                st = (PreparedStatement) dbcon.prepareStatement("INSERT INTO usuarios(UNAME, NAME, SURNAME, NUM, EMAIL, UPASS, CONUPASS) VALUES(?,?,?,?,?,?,?)");
+                st.setString(1, rusername);
+                st.setString(2, rname);
+                st.setString(3, rsurname);
+                st.setString(4, rnum);
+                st.setString(5, rmail);
+                st.setString(6, rpass);
+                st.setString(7, rconfrimarcontra);
+                int res = st.executeUpdate();
+                dispose();
+                Dashboard d = new Dashboard();
+                d.setTitle("Clientes");
+                d.setVisible(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(registerForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        } catch (SQLException ex) {
-            Logger.getLogger(registerForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        }
-        
+
     }
 }
